@@ -1,0 +1,126 @@
+/* Valentine Quest - Global Styles */
+:root {
+  --valentine-pink: #ff6b9d;
+  --valentine-rose: #e84393;
+  --valentine-deep: #fd79a8;
+  --valentine-soft: #ffeaa7;
+  --valentine-white: #fff5f7;
+  --valentine-dark: #2d132c;
+  --glow-pink: rgba(255, 107, 157, 0.6);
+  --shadow-soft: 0 4px 20px rgba(232, 67, 147, 0.2);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", "Georgia", serif;
+  color: var(--valentine-dark);
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Page wrapper defaults */
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.page h1 {
+  font-size: clamp(1.5rem, 5vw, 2.25rem);
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  line-height: 1.3;
+}
+
+.page p {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  margin: 0 0 1.5rem;
+  opacity: 0.95;
+}
+
+/* Buttons */
+.btn {
+  padding: 0.75rem 1.75rem;
+  font-size: 1.1rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--valentine-pink), var(--valentine-rose));
+  color: white;
+  box-shadow: var(--shadow-soft);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 6px 28px var(--glow-pink);
+}
+
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Smooth route transitions */
+.fade-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
