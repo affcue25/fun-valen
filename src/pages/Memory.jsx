@@ -20,7 +20,7 @@ export default function Memory() {
   };
 
   return (
-    <PageWrapper gradient="memory">
+    <PageWrapper showHearts gradient="memory">
       <p
         style={{
           fontSize: "0.85rem",

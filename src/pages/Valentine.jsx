@@ -22,7 +22,7 @@ export default function Valentine() {
   };
 
   return (
-    <PageWrapper gradient="valentine">
+    <PageWrapper showHearts gradient="valentine">
       <div
         style={{
           position: "relative",

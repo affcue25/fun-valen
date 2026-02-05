@@ -16,7 +16,7 @@ export default function Surprise() {
   const handleYes = () => navigate("/quiz");
 
   return (
-    <PageWrapper gradient="surprise">
+    <PageWrapper showHearts gradient="surprise">
       <motion.h1
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

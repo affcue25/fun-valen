@@ -14,7 +14,7 @@ export default function Feelings() {
   const navigate = useNavigate();
 
   return (
-    <PageWrapper gradient="feelings">
+    <PageWrapper showHearts gradient="feelings">
       <motion.h1
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

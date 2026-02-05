@@ -21,7 +21,7 @@ export default function Choice() {
   };
 
   return (
-    <PageWrapper gradient="choice">
+    <PageWrapper showHearts gradient="choice">
       <motion.h1
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

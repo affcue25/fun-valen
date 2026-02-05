@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function MovingButton({
@@ -13,7 +13,17 @@ export default function MovingButton({
   const [clicked, setClicked] = useState(false);
   const [hoverCount, setHoverCount] = useState(0);
   const [gaveUp, setGaveUp] = useState(false);
+  const [giveUpExiting, setGiveUpExiting] = useState(false);
   const [label, setLabel] = useState("No 🙄");
+
+  useEffect(() => {
+    if (!gaveUp) return;
+    const t = setTimeout(() => {
+      setGiveUpExiting(true);
+      onGiveUp?.();
+    }, 2000);
+    return () => clearTimeout(t);
+  }, [gaveUp, onGiveUp]);
 
   const getMoveAmount = useCallback(() => {
     if (hoverCount >= 6) return 95;
@@ -30,7 +40,6 @@ export default function MovingButton({
     if (next >= 7) {
       setLabel("Okay okay 😩 I give up");
       setGaveUp(true);
-      setTimeout(() => onGiveUp?.(), 1200);
       return;
     }
 
@@ -84,8 +93,8 @@ export default function MovingButton({
         <motion.div
           key="give-up"
           initial={{ opacity: 1, scale: 1 }}
-          animate={{ opacity: 0, scale: 0.3 }}
-          transition={{ duration: 0.5 }}
+          animate={giveUpExiting ? { opacity: 0, scale: 0.3 } : { opacity: 1, scale: 1 }}
+          transition={{ duration: giveUpExiting ? 0.5 : 0 }}
           style={{
             position: "fixed",
             top: position.top,

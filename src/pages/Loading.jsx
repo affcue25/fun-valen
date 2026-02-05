@@ -38,7 +38,7 @@ export default function Loading() {
   }, [navigate]);
 
   return (
-    <PageWrapper gradient="loading">
+    <PageWrapper showHearts gradient="loading">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
