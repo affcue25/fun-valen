@@ -1,14 +1,18 @@
 import { motion } from "framer-motion";
 import FloatingHearts from "./FloatingHearts";
+import LoveMeter from "./LoveMeter";
 import "../styles/global.css";
 import "../styles/animations.css";
 
-export default function PageWrapper({ children, gradient = "default", showHearts = false }) {
+export default function PageWrapper({ children, gradient = "default", showHearts = false, hideMeter = false }) {
   const gradients = {
     default: "linear-gradient(135deg, #fff5f7 0%, #ffe4ec 50%, #ffd6e0 100%)",
     surprise: "linear-gradient(135deg, #fff9e6 0%, #ffe4b5 50%, #ffd699 100%)",
     quiz: "linear-gradient(135deg, #fff0f5 0%, #ffd6e8 50%, #ffb3d9 100%)",
     feelings: "linear-gradient(135deg, #f0f4ff 0%, #e8eeff 50%, #dde5ff 100%)",
+    choice: "linear-gradient(135deg, #fff5f0 0%, #ffe8e0 50%, #ffddd0 100%)",
+    loading: "linear-gradient(135deg, #f5f0ff 0%, #ebe0ff 50%, #e0d5ff 100%)",
+    memory: "linear-gradient(135deg, #f8f0ff 0%, #efe5ff 50%, #e5daff 100%)",
     valentine: "linear-gradient(135deg, #ffebf0 0%, #ffcce0 50%, #ffb3d0 100%)",
     yes: "linear-gradient(135deg, #ff6b9d 0%, #e84393 50%, #fd79a8 100%)",
   };
@@ -29,8 +33,9 @@ export default function PageWrapper({ children, gradient = "default", showHearts
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
+      {!hideMeter && <LoveMeter />}
       {showHearts && <FloatingHearts />}
-      <div style={{ position: "relative", zIndex: 1, width: "100%", maxWidth: "32rem" }}>
+      <div style={{ position: "relative", zIndex: 1, width: "100%", maxWidth: "32rem", paddingTop: hideMeter ? 0 : "3.5rem" }}>
         {children}
       </div>
     </motion.div>

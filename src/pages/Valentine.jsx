@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import PageWrapper from "../components/PageWrapper";
@@ -7,6 +8,18 @@ import "../styles/animations.css";
 
 export default function Valentine() {
   const navigate = useNavigate();
+  const [reverseClicked, setReverseClicked] = useState(false);
+  const [yesBoost, setYesBoost] = useState(1);
+  const [noSpeed, setNoSpeed] = useState(1);
+  const [noGaveUp, setNoGaveUp] = useState(false);
+
+  const handleReverseClick = () => {
+    if (reverseClicked) return;
+    setReverseClicked(true);
+    alert("Wow… you never listen 😄");
+    setYesBoost(1.25);
+    setNoSpeed(1.8);
+  };
 
   return (
     <PageWrapper gradient="valentine">
@@ -29,6 +42,26 @@ export default function Valentine() {
           💘 Will you be my Valentine?
         </motion.h1>
 
+        {!reverseClicked && (
+          <motion.button
+            type="button"
+            onClick={handleReverseClick}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            style={{
+              marginBottom: "1rem",
+              padding: "0.4rem 0.8rem",
+              fontSize: "0.85rem",
+              background: "rgba(0,0,0,0.06)",
+              color: "var(--valentine-dark)",
+              borderRadius: "999px",
+              border: "1px dashed rgba(0,0,0,0.15)",
+            }}
+          >
+            Don't click this 👀
+          </motion.button>
+        )}
+
         <div
           className="btn-group"
           style={{
@@ -43,10 +76,17 @@ export default function Valentine() {
             className="btn btn-primary animate-glow"
             onClick={() => navigate("/yes")}
             style={{ position: "relative", zIndex: 2 }}
-            whileHover={{ scale: 1.12, boxShadow: "0 0 40px rgba(255, 107, 157, 0.7)" }}
+            animate={{
+              scale: noGaveUp ? 1.2 : yesBoost,
+            }}
+            transition={{ type: "spring", stiffness: 200, damping: 20 }}
+            whileHover={{
+              scale: (noGaveUp ? 1.2 : yesBoost) * 1.08,
+              boxShadow: "0 0 40px rgba(255, 107, 157, 0.7)",
+            }}
             whileTap={{ scale: 0.98 }}
           >
-            Yes 💕
+            {noGaveUp ? "Obviously Yes 💖" : "Yes 💕"}
           </motion.button>
           <MovingButton
             className="btn"
@@ -58,6 +98,8 @@ export default function Valentine() {
               fontWeight: 600,
               zIndex: 1,
             }}
+            speedMultiplier={noSpeed}
+            onGiveUp={() => setNoGaveUp(true)}
           />
         </div>
       </div>

@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import confetti from "canvas-confetti";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import PageWrapper from "../components/PageWrapper";
 import celebrationGif from "../assets/celebration.gif";
 import "../styles/global.css";
@@ -30,6 +30,8 @@ function fireConfetti() {
 }
 
 export default function Yes() {
+  const [showSurprise, setShowSurprise] = useState(false);
+
   useEffect(() => {
     const t = setTimeout(fireConfetti, 400);
     return () => clearTimeout(t);
@@ -83,6 +85,51 @@ export default function Yes() {
           boxShadow: "0 8px 24px rgba(0,0,0,0.2)",
         }}
       />
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.8 }}
+        style={{ marginTop: "2rem", paddingTop: "1rem", borderTop: "1px solid rgba(255,255,255,0.3)" }}
+      >
+        <p style={{ color: "rgba(255,255,255,0.9)", fontSize: "1rem", marginBottom: "0.75rem" }}>
+          There's one more thing…
+        </p>
+        {!showSurprise ? (
+          <motion.button
+            type="button"
+            onClick={() => setShowSurprise(true)}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            style={{
+              padding: "0.5rem 1rem",
+              borderRadius: "999px",
+              background: "rgba(255,255,255,0.25)",
+              color: "white",
+              border: "1px solid rgba(255,255,255,0.5)",
+              fontWeight: 600,
+              cursor: "pointer",
+            }}
+          >
+            Tell me 👀
+          </motion.button>
+        ) : (
+          <AnimatePresence>
+            <motion.p
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              style={{
+                color: "white",
+                fontSize: "1.1rem",
+                fontStyle: "italic",
+                maxWidth: "20rem",
+                margin: "0 auto",
+              }}
+            >
+              Thank you for choosing me ❤️
+            </motion.p>
+          </AnimatePresence>
+        )}
+      </motion.div>
     </PageWrapper>
   );
 }
